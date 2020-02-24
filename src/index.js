@@ -1,38 +1,50 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-    createFormListener();
-    createClickListener();
-});
+// declared vars
+let tasks = document.getElementById('tasks');
+const taskForm = document.getElementById("create-task-form");
+let deleteButton = document.getElementsByClassName('delete-btn')
 
-function createFormListener() {
+// created elements
+let createNewNode = document.createElement("li");
+let button = document.createElement("BUTTON");
 
-    const taskForm = document.getElementById("create-task-form");
 
-    taskForm.addEventListener('submit', function(event) {
-      event.preventDefault();
+// defined functions
+const toggleColor = () => {
+  if (event.target.style.color === '') {
+    event.target.style.color = 'pink'
+  } else if (event.target.style.color === 'pink') {
+    event.target.style.color = 'black'
+  } else event.target.style.color = 'blue'
+}
 
-      let tasks = document.getElementById('tasks');
-      let userInput = event.target.children[1].value;
-      let createNewNode = document.createElement("li");
-      createNewNode.innerText = userInput;
-      tasks.appendChild(createNewNode);
-      let button = document.createElement("BUTTON");
-      button.className = 'delete-btn'
-      createNewNode.appendChild(button);
-      button.innerHTML = "X";
-      taskForm.reset();
-  })
+const clickAction = (event) => {
+    if (event.target.className === "delete-btn") {
+    event.target.parentNode.remove();
+  } else if (event.target.tagName === "LI") {
+    toggleColor()
+  }
 };
 
-function createClickListener() {
-  let tasks = document.getElementById('tasks');
-    tasks.addEventListener('click', function(event) {
-      let button = document.getElementsByClassName('delete-btn')
-      if (event.target.className === "delete-btn") {
-      event.target.parentNode.remove();
-    }
-  })
+const submitAction = (event) => {
+  // prevent redirection of page
+  event.preventDefault();
+  // set vars from input
+  let userInput = event.target.children[1].value;
+  createNewNode.innerText = userInput;
+  tasks.appendChild(createNewNode);
+  button.className = 'delete-btn'
+  createNewNode.appendChild(button);
+  button.innerHTML = 'X';
+  // clear the form input field
+  taskForm.reset();
 };
+
+// event listeners
+taskForm.addEventListener('submit', submitAction)
+tasks.addEventListener('click', clickAction)
+
+// called functions
 
 
 // A priority value selected from a dropdown that is used to determine the color of the text in the list (e.g. red for high priority, yellow for medium, green for low)
