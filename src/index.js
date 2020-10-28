@@ -13,7 +13,7 @@ const dropdown = document.getElementById('importance-dropdown');
 
 // this function accepts an importance value as a string (ie "High", "Medium" || "Low")
 // then returns a color that represents that importance level
-const setStyle = (importanceValue) => {
+function setStyle(importanceValue){
   // declare color variable so it is available within the scope of the whole function
   let color;
   // choose a color based on the importance value from the form
@@ -30,7 +30,7 @@ const setStyle = (importanceValue) => {
 
 
 // define a function to handle the functionality for adding an element to the list.
-const addToList = (inputValue, importanceValue) => {
+function addToList(inputValue, importanceValue){
   // create LI element
   let LI = document.createElement("LI");
   // set the inner HTML of the LI tag to the input value coming in from the form input
@@ -59,7 +59,7 @@ const addToList = (inputValue, importanceValue) => {
 
 
 // add a submit event listener when the user submits the form
-document.addEventListener('submit', (e) => {
+document.addEventListener('submit', function(e){
   // prevent the default submission of the form
   e.preventDefault();
   // find the user input that they typed into the form
@@ -72,7 +72,7 @@ document.addEventListener('submit', (e) => {
 
 
 // add a click event listener on the entire document
-document.addEventListener("click", (e) => {
+document.addEventListener("click", function(e){
   // check if the class name of the clicked element is "delete-btn"
   if (e.target.className === "delete-btn") {
     // grab the event's target's parent element (one level up in the HTML tree)
